@@ -4,33 +4,49 @@
 #@File : User.py
 #@Software: PyCharm
 
-class User(object):
-    def __init__(self,userid,usertype,alpha,task,env):
-        """
-        :param userid: 用户id
-        :param usertype: 用户类型 0 1 2 个人 家庭 企业
-        :param alpha: 用户任务生成速率
-        :param task: 用户任务：任务类型（0 C 1 G 2 A）+任务处理时间+任务价值+竞标价格
-        :param env: 当前环境
-        """
-        self.userid = userid
-        self.usertype=usertype
-        self.alpha = alpha
-        self.task = task
-        self.env = env
+import logging
+import numpy as np
 
-    #重置用户信息
+class User(object):
+    def __init__(self,userid,usertype,env):
+        #用户处在的环境
+        self.env = env
+        #用户id
+        self.userid = userid
+        #用户类型
+        self.usertype = usertype
+        #用户生成任务速率
+        self.alpha = 0
+        #每个time spot用户生成的任务
+        self.tasks = {}
+        #任务处理结果
+        self.finished = True
+
+    #初始化用户信息
     def InitUser(self):
+        self.finished = True
+        #生成用户类型
+        np.random.seed(1)
+        self.usertype = np.random.randint(0,3,dtype="l")
         return
 
     #更新用户信息
     def UpdateUser(self):
         return
-    """
-    生成任务信息
-    """
+
+    #生成新任务
     def SetupTask(self):
-        return
+        """
+        任务=任务类型+任务处理时间+任务价值+竞标价格
+        :return:
+        """
+        #任务类型
+        np.random.seed(1)
+        self.usertype = np.random.randint(0,3,dtype="l")
+        task={}
+        task["userid"] = self.userid
+        task["tasktype"] = np.random.randint(0,3,dtype="l")
+
 
     """
     记录任务提交记录
