@@ -1,11 +1,7 @@
-from server import Server
-from device import Device
-import mylog
 import json
 import numpy as np
 import os
 import shutil
-import User,Node,Broker
 currentPath = os.path.abspath()
 parentDir = os.path.abspath(os.path.dirname(currentPath)+os.path.sep+".")
 class Env:
